@@ -8,25 +8,24 @@ using namespace std;
 
 int main()
 {
-	int poczatek = 2;
 	cout << "Podaj koniec przedzialu, aby wyswietlic zawarte w nim liczby pierwsze ";
 	int koniec;
 	cin >> koniec;
 
-	for (poczatek; poczatek <= koniec; poczatek++)
+	for (int liczba = 2; liczba <= koniec; liczba++)
 	{
-		for (int dzielnik = 2; dzielnik <= poczatek; dzielnik++)
+		for (int dzielnik = 2; dzielnik <= liczba; dzielnik++)
 		{			
-			if (poczatek % dzielnik == 0)
+			if (liczba % dzielnik == 0)
 			{
-				if (poczatek == dzielnik)
-				cout << poczatek << ", ";
+				if (liczba == dzielnik)
+					cout << liczba << ", ";
 				else break;
 			}	
 		}
 	}
 
 	system("pause");
-    return 0;
+	return 0;
 }
 

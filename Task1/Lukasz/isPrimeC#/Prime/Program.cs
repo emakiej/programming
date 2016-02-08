@@ -10,18 +10,17 @@ namespace Prime
     {
         static void Main(string[] args)
         {
-            int poczatek = 2;
             Console.WriteLine("Podaj koniec przedzialu, aby wyswietlic zawarte w nim liczby pierwsze ");
             int koniec = int.Parse(Console.ReadLine());
 
-            for (poczatek=2; poczatek <= koniec; poczatek++)
+            for (int liczba=2; liczba <= koniec; liczba++)
             {
-                for (int dzielnik = 2; dzielnik <= poczatek; dzielnik++)
+                for (int dzielnik = 2; dzielnik <= liczba; dzielnik++)
                 {
-                    if (poczatek % dzielnik == 0)
+                    if (liczba % dzielnik == 0)
                     {
-                        if (poczatek == dzielnik)
-                        Console.Write(poczatek + ", ");
+                        if (liczba == dzielnik)
+                        Console.Write(liczba + ", ");
                         else break;
                     }
                 }
