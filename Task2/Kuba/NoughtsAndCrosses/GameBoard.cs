@@ -10,18 +10,6 @@ namespace NoughtsAndCrosses
         public GameBoard()
         {
             gameBoard = new GameBoardStatus[boardSize, boardSize];
-            EmptyTheBoard();
-        }
-
-        private void EmptyTheBoard()
-        {
-            for (int i = 0; i < boardSize; i++)
-            {
-                for (int j = 0; j < boardSize; j++)
-                {
-                    this.gameBoard[i, j] = GameBoardStatus.empty;
-                }
-            }
         }
 
         public void MarkPlayerTurn(Player player, Position coordinates)
@@ -51,9 +39,9 @@ namespace NoughtsAndCrosses
 
         private bool CheckVertically(Player player)
         {
-            int playerSymbolCount = 0;
             for (int i = 0; i < boardSize; i++)
             {
+                int playerSymbolCount = 0;
                 for (int j = 0; j < boardSize; j++)
                 {
                     if (this.gameBoard[j, i] == player.ChoosenSymbol)
@@ -65,19 +53,15 @@ namespace NoughtsAndCrosses
                 {
                     return true;
                 }
-                else
-                {
-                    playerSymbolCount = 0;
-                }
             }
             return false;
         }
 
         private bool CheckHorizontally(Player player)
         {
-            int playerSymbolCount = 0;
             for (int i = 0; i < boardSize; i++)
             {
+                int playerSymbolCount = 0;
                 for (int j = 0; j < boardSize; j++)
                 {
                     if (this.gameBoard[i, j] == player.ChoosenSymbol)
@@ -88,10 +72,6 @@ namespace NoughtsAndCrosses
                 if (playerSymbolCount == boardSize)
                 {
                     return true;
-                }
-                else
-                {
-                    playerSymbolCount = 0;
                 }
             }
             return false;

@@ -44,9 +44,10 @@
     <Compile Include="BoardConsoleTranslator.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="GameBoardStatus.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Position.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
