@@ -2,9 +2,9 @@
 
 namespace NoughtsAndCrosses
 {
-    class BoardConsoleTranslator
+    class BoardConsoleTranslator :IBoardCommunication
     {
-        public void PrintToConsole(GameBoard board)
+        public void ShowTheBoard(GameBoard board)
         {
             for (int i = 0; i < board.boardSize; i++)
             {
@@ -16,7 +16,7 @@ namespace NoughtsAndCrosses
             }
         }
 
-        private string TranslateStatus(GameBoardStatus status)
+        public String TranslateStatus(GameBoardStatus status)
         {
             if (status == GameBoardStatus.nought) return "|O|";
             if (status == GameBoardStatus.cross) return "|X|";
@@ -26,16 +26,16 @@ namespace NoughtsAndCrosses
         public Position AskForCoordinatesUntilValid(GameBoard board)
         {
             Position coordinates = new Position();
-            coordinates = TranslatePlayerInputIntoCoordinates();
+            coordinates = GetPlayerInput();
             while (!board.CoordinatesAreValid(coordinates))
             {
                 Console.WriteLine("Coordinates not valid!");
-                coordinates = TranslatePlayerInputIntoCoordinates();
+                coordinates = GetPlayerInput();
             }
             return coordinates;
         }
 
-        private Position TranslatePlayerInputIntoCoordinates()
+        public Position GetPlayerInput() //is the name descriptive enough?
         {
             Position coordinates = new Position();
             int indexDifference = 1;
@@ -50,6 +50,18 @@ namespace NoughtsAndCrosses
             int coordinate = 0;
             int.TryParse(Console.ReadLine(), out coordinate);
             return coordinate;
+        }
+
+        public void ShowGameResult(GameBoard board, Player player)
+        {
+            if (board.PlayerWon(player))
+            {
+                Console.WriteLine(player.Name + " won!");
+            }
+            else if (board.BoardIsFull())
+            {
+                Console.WriteLine("Tie!");
+            }
         }
     }
 }

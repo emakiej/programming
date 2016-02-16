@@ -4,7 +4,7 @@ namespace NoughtsAndCrosses
 {
     public class GameBoard
     {
-        public readonly int boardSize = 3; //Kuba: czy lepsze byłoby pole statyczne?
+        public readonly int boardSize = 3; //static?
         public GameBoardStatus[,] gameBoard;
 
         public GameBoard()
