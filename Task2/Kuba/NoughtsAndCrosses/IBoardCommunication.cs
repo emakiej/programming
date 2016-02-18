@@ -1,8 +1,8 @@
 ﻿namespace NoughtsAndCrosses
 {
-    interface IBoardCommunication
+    public interface IBoardCommunication
     {
-        void ShowTheBoard(GameBoard board);
+        void ShowBoard(GameBoard board);
         void ShowGameResult(GameBoard board, Player player);
         Position GetPlayerInput();
     }

@@ -4,7 +4,7 @@ namespace NoughtsAndCrosses
 {
     class BoardConsoleTranslator :IBoardCommunication
     {
-        public void ShowTheBoard(GameBoard board)
+        public void ShowBoard(GameBoard board)
         {
             for (int i = 0; i < board.boardSize; i++)
             {
@@ -23,7 +23,7 @@ namespace NoughtsAndCrosses
             else return "| |";
         }
 
-        public Position AskForCoordinatesUntilValid(GameBoard board)
+        /*public Position AskForCoordinatesUntilValid(GameBoard board)
         {
             Position coordinates = new Position();
             coordinates = GetPlayerInput();
@@ -33,7 +33,7 @@ namespace NoughtsAndCrosses
                 coordinates = GetPlayerInput();
             }
             return coordinates;
-        }
+        }*/
 
         public Position GetPlayerInput() //is the name descriptive enough?
         {
@@ -62,6 +62,23 @@ namespace NoughtsAndCrosses
             {
                 Console.WriteLine("Tie!");
             }
+        }
+
+        public void Welcome()
+        {
+            Console.WriteLine("Welcome to Nougths And Crosses!");
+        }
+
+        public string GetPlayerName(int playerIndex, GameBoardStatus symbol)
+        {
+            Console.WriteLine("Player " + playerIndex.ToString() + " will play with " + symbol + ". Type player name:");
+            string name = Console.ReadLine();
+            return name;
+        }
+
+        public void NotifyCoordinatesInvalid()
+        {
+            Console.WriteLine("Coordinates not valid! Please, retry.");
         }
     }
 }

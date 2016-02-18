@@ -4,23 +4,28 @@ namespace NoughtsAndCrosses
 {
     class Game
     {
+        public IBoardCommunication interpreter;
+        public Game(IBoardCommunication interpreter)
+        {
+            this.interpreter = interpreter;
+        }
+
         public void GameLoop(Player player1, Player player2, GameBoard board)
         {
-            BoardConsoleTranslator consoleInterpreter = new BoardConsoleTranslator(); //can't use consoleInterperter here - needs to be universal (dependency injection)
             bool gameOver = false;
             Player currentPlayer = player1;
             while (!gameOver)
             {
                 MakeMove(board, currentPlayer);
                 gameOver = GameIsOver(board, currentPlayer);
-                consoleInterpreter.ShowTheBoard(board);
+                interpreter.ShowBoard(board);
                 if (gameOver) break;
                 currentPlayer = ChangePlayer(currentPlayer, player1, player2);
             }
-            consoleInterpreter.ShowGameResult(board, currentPlayer);
+            interpreter.ShowGameResult(board, currentPlayer);
         }
 
-        private static Player ChangePlayer(Player currentPlayer, Player player1, Player player2)
+        private Player ChangePlayer(Player currentPlayer, Player player1, Player player2)
         {
             if (currentPlayer == player1)
             {
@@ -32,11 +37,15 @@ namespace NoughtsAndCrosses
             }
         }
 
-        private static void MakeMove(GameBoard board, Player player) 
+        private void MakeMove(GameBoard board, Player player) 
         {
             Position coordinates;
-            BoardConsoleTranslator consoleInterpreter = new BoardConsoleTranslator(); //can't use consoleInterperter here - needs to be universal
-            coordinates = consoleInterpreter.AskForCoordinatesUntilValid(board);
+            coordinates = interpreter.GetPlayerInput();
+            while (!board.CoordinatesAreValid(coordinates))
+            {
+                //interpreter
+                coordinates = interpreter.GetPlayerInput();
+            }
             board.MarkPlayerTurn(player, coordinates);
         }
 
