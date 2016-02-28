@@ -6,9 +6,9 @@ namespace NoughtsAndCrosses
     {
         public void ShowBoard(GameBoard board)
         {
-            for (int i = 0; i < board.boardSize; i++)
+            for (int i = 0; i < GameBoard.boardSize; i++)
             {
-                for (int j = 0; j < board.boardSize; j++)
+                for (int j = 0; j < GameBoard.boardSize; j++)
                 {
                     Console.Write(TranslateStatus(board.gameBoard[i, j]));
                 }
@@ -22,18 +22,6 @@ namespace NoughtsAndCrosses
             if (status == GameBoardStatus.cross) return "|X|";
             else return "| |";
         }
-
-        /*public Position AskForCoordinatesUntilValid(GameBoard board)
-        {
-            Position coordinates = new Position();
-            coordinates = GetPlayerInput();
-            while (!board.CoordinatesAreValid(coordinates))
-            {
-                Console.WriteLine("Coordinates not valid!");
-                coordinates = GetPlayerInput();
-            }
-            return coordinates;
-        }*/
 
         public Position GetPlayerInput() //is the name descriptive enough?
         {
@@ -52,13 +40,13 @@ namespace NoughtsAndCrosses
             return coordinate;
         }
 
-        public void ShowGameResult(GameBoard board, Player player)
+        public void ShowGameResult(GameBoard board, Player lastPlayer, GameStatus gameStatus)
         {
-            if (board.PlayerWon(player))
+            if (gameStatus == GameStatus.PlayerWon)
             {
-                Console.WriteLine(player.Name + " won!");
+                Console.WriteLine(lastPlayer.Name + " won!");
             }
-            else if (board.BoardIsFull())
+            else
             {
                 Console.WriteLine("Tie!");
             }
@@ -72,8 +60,7 @@ namespace NoughtsAndCrosses
         public string GetPlayerName(int playerIndex, GameBoardStatus symbol)
         {
             Console.WriteLine("Player " + playerIndex.ToString() + " will play with " + symbol + ". Type player name:");
-            string name = Console.ReadLine();
-            return name;
+            return Console.ReadLine();
         }
 
         public void NotifyCoordinatesInvalid()

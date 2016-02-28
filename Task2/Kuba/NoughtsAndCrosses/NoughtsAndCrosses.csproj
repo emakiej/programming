@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameStatus.cs" />
     <Compile Include="IBoardCommunication.cs" />
     <Compile Include="BoardConsoleTranslator.cs" />
     <Compile Include="GameBoard.cs" />

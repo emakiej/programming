@@ -4,7 +4,7 @@ namespace NoughtsAndCrosses
 {
     public class GameBoard
     {
-        public readonly int boardSize = 3; //static?
+        public static int boardSize = 3;
         public GameBoardStatus[,] gameBoard;
 
         public GameBoard()
@@ -34,42 +34,27 @@ namespace NoughtsAndCrosses
 
         public bool PlayerWon(Player player)
         {
-            return (CheckVertically(player) || CheckHorizontally(player) || CheckDiagonally(player));
+            return (CheckVerticallyAndHorizontally(player) || CheckDiagonally(player));
         }
 
-        private bool CheckVertically(Player player)
+        private bool CheckVerticallyAndHorizontally(Player player)
         {
             for (int i = 0; i < boardSize; i++)
             {
-                int playerSymbolCount = 0;
+                int playerVerticalSymbolCount = 0;
+                int playerHorizontalSymbolCount = 0;
                 for (int j = 0; j < boardSize; j++)
                 {
                     if (this.gameBoard[j, i] == player.ChoosenSymbol)
                     {
-                        playerSymbolCount++;
+                        playerVerticalSymbolCount++;
                     }
-                }
-                if (playerSymbolCount == boardSize)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool CheckHorizontally(Player player)
-        {
-            for (int i = 0; i < boardSize; i++)
-            {
-                int playerSymbolCount = 0;
-                for (int j = 0; j < boardSize; j++)
-                {
-                    if (this.gameBoard[i, j] == player.ChoosenSymbol)
+                    else if (this.gameBoard[i, j] == player.ChoosenSymbol)
                     {
-                        playerSymbolCount++;
+                        playerHorizontalSymbolCount++;
                     }
                 }
-                if (playerSymbolCount == boardSize)
+                if (playerHorizontalSymbolCount == boardSize || playerVerticalSymbolCount == boardSize)
                 {
                     return true;
                 }
@@ -79,31 +64,20 @@ namespace NoughtsAndCrosses
 
         private bool CheckDiagonally(Player player)
         {
-            int playerSymbolCount = 0;
+            int playerAscendingSymbolCount = 0;
+            int playerDescendingSymbolCount = 0;
             for (int i = 0; i < boardSize; i++)
             {
                 if (this.gameBoard[i, i] == player.ChoosenSymbol)
                 {
-                    playerSymbolCount++;
+                    playerDescendingSymbolCount++;
                 }
-            }
-            if (playerSymbolCount == boardSize)
-            {
-                return true;
-            }
-            else
-            {
-                playerSymbolCount = 0;
-            }
-
-            for (int i = 0; i < boardSize; i++)
-            {
                 if (this.gameBoard[i, (boardSize - 1) - i] == player.ChoosenSymbol)
                 {
-                    playerSymbolCount++;
+                    playerAscendingSymbolCount++;
                 }
             }
-            if (playerSymbolCount == boardSize)
+            if (playerAscendingSymbolCount == boardSize || playerDescendingSymbolCount == boardSize)
             {
                 return true;
             }

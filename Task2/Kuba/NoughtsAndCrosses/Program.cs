@@ -16,9 +16,8 @@ namespace NoughtsAndCrosses
             player2.Name = interpreter.GetPlayerName(2, GameBoardStatus.cross);
             player2.ChoosenSymbol = GameBoardStatus.cross;
 
-            GameBoard board = new GameBoard();
             Game game = new Game(interpreter);
-            game.GameLoop(player1, player2, board);
+            game.GameLoop(player1, player2);
 
             Console.ReadLine();
         }

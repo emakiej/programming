@@ -10,19 +10,19 @@ namespace NoughtsAndCrosses
             this.interpreter = interpreter;
         }
 
-        public void GameLoop(Player player1, Player player2, GameBoard board)
+        public void GameLoop(Player player1, Player player2)
         {
-            bool gameOver = false;
-            Player currentPlayer = player1;
-            while (!gameOver)
+            GameBoard board = new GameBoard();
+            GameStatus gameStatus = new GameStatus();
+            Player currentPlayer = player2;
+            while (gameStatus == GameStatus.Active)
             {
-                MakeMove(board, currentPlayer);
-                gameOver = GameIsOver(board, currentPlayer);
-                interpreter.ShowBoard(board);
-                if (gameOver) break;
                 currentPlayer = ChangePlayer(currentPlayer, player1, player2);
+                MakeMove(board, currentPlayer);
+                gameStatus = GetGameStatus(board, currentPlayer);
+                interpreter.ShowBoard(board);
             }
-            interpreter.ShowGameResult(board, currentPlayer);
+            interpreter.ShowGameResult(board, currentPlayer, gameStatus);
         }
 
         private Player ChangePlayer(Player currentPlayer, Player player1, Player player2)
@@ -37,21 +37,28 @@ namespace NoughtsAndCrosses
             }
         }
 
-        private void MakeMove(GameBoard board, Player player) 
+        private void MakeMove(GameBoard board, Player player)
         {
             Position coordinates;
-            coordinates = interpreter.GetPlayerInput();
-            while (!board.CoordinatesAreValid(coordinates))
+            do
             {
-                //interpreter
                 coordinates = interpreter.GetPlayerInput();
             }
+            while (!board.CoordinatesAreValid(coordinates));
             board.MarkPlayerTurn(player, coordinates);
         }
 
-        private static bool GameIsOver(GameBoard board, Player player)
+        private GameStatus GetGameStatus(GameBoard board, Player player)
         {
-            return(board.PlayerWon(player) || board.BoardIsFull());
+            if (board.PlayerWon(player))
+            {
+                return GameStatus.PlayerWon;
+            }
+            else if (board.BoardIsFull())
+            {
+                return GameStatus.Tie;
+            }
+            return GameStatus.Active;
         }
     }
 }
