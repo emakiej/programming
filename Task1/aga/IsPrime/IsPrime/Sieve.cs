@@ -6,29 +6,24 @@ using System.Threading.Tasks;
 
 namespace IsPrime
 {
-    class IsPrime
+    internal class Sieve
     {
-        private static int max;
+        private int _max;
 
-        public IsPrime(int val)
+        public Sieve(int val)
         {
-           SetMax(val);
+           _max=val;
         }
         
-        public void SetMax(int val)
-        {
-            max = val;
-        }
-
         private bool[] MakeSieve()
         {
-            bool[] isPrime = new bool[max + 1];
-            for (int i = 2; i<=max; i++) { isPrime[i] = true; }
-            for (int i = 2; i<=max;i++)
+            bool[] isPrime = new bool[_max + 1];
+            for (int i = 2; i<=_max; i++) { isPrime[i] = true; }
+            for (int i = 2; i<=_max;i++)
             {
                 if (isPrime[i])
                 {
-                    for (int j = i * 2; j<=max; j+=i)
+                    for (int j = i * 2; j<=_max; j+=i)
                     {
                         isPrime[j] = false;
                     }
@@ -37,16 +32,18 @@ namespace IsPrime
             return isPrime;
         }
 
-        public void GetPrimes()
+        public List<int> GetPrimes()
         {
             bool[] primes = MakeSieve();
-            for (int i = 2; i<=max;i++)
+            List<int> primeList = new List<int>();
+            for (int i = 2; i<=_max;i++)
             {
                 if (primes[i])
                 {
-                    Console.Write("{0} ", i);
+                    primeList.Add(i);
                 }
             }
+            return primeList;
         }
 
 

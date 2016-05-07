@@ -8,12 +8,27 @@ namespace IsPrime
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            IsPrime isPrime = new IsPrime(Convert.ToInt32(Console.ReadLine()));
+            Console.WriteLine("Please input an integer:");
+            string userValue = Console.ReadLine();
 
-            isPrime.GetPrimes();
-            Console.ReadKey();
+            try
+            {
+                int intValue = int.Parse(userValue);
+                Sieve sieve = new Sieve(intValue);
+                Console.Write("Your primes are: ");
+                sieve.GetPrimes().ForEach(i => Console.Write("{0}\t", i));
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Main();
+            }
+            
         }
+
+        
     }
 }
