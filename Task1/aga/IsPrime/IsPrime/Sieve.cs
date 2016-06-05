@@ -8,14 +8,14 @@ namespace IsPrime
 {
     internal class Sieve
     {
-        private int _max;
+       
 
-        public Sieve(int val)
+        public Sieve()
         {
-           _max=val;
+           
         }
         
-        private bool[] MakeSieve()
+        private bool[] MakeSieve(int _max)
         {
             bool[] isPrime = new bool[_max + 1];
             for (int i = 2; i<=_max; i++) { isPrime[i] = true; }
@@ -32,9 +32,9 @@ namespace IsPrime
             return isPrime;
         }
 
-        public List<int> GetPrimes()
+        public List<int> GetPrimes(int _max)
         {
-            bool[] primes = MakeSieve();
+            bool[] primes = MakeSieve(_max);
             List<int> primeList = new List<int>();
             for (int i = 2; i<=_max;i++)
             {

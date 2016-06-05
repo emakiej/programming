@@ -16,9 +16,9 @@ namespace IsPrime
             try
             {
                 int intValue = int.Parse(userValue);
-                Sieve sieve = new Sieve(intValue);
+                Sieve sieve = new Sieve();
                 Console.Write("Your primes are: ");
-                sieve.GetPrimes().ForEach(i => Console.Write("{0}\t", i));
+                sieve.GetPrimes(intValue).ForEach(i => Console.Write("{0}\t", i));
                 Console.ReadKey();
             }
             catch (Exception e)
