@@ -1,0 +1,85 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:NoughtsAndCrossesWPF="clr-namespace:NoughtsAndCrossesWPF"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="NoughtsAndCrossesWPF.MainWindow"
+        Title="Noughts And Crosses" Height="380" Width="500">
+    <Window.Resources>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="3" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="AliceBlue" Offset="0"/>
+            <GradientStop Color="White" Offset="0.25"/>
+            <GradientStop Color="White" Offset="0.5"/>
+            <GradientStop Color="AliceBlue" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="Gray"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Berlin Sans FB" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Themes:ButtonChrome x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderPressed="{TemplateBinding IsPressed}" RenderDefaulted="{TemplateBinding IsDefaulted}" SnapsToDevicePixels="true" Style="{DynamicResource ButtonFocusVisual}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Themes:ButtonChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <NoughtsAndCrossesWPF:ViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Button00" Content="{Binding ObservableBoard[0], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="0" Width="100" Height="100" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="Button01" Content="{Binding ObservableBoard[1], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="1" Width="100" Height="100" Grid.Column="2" Grid.Row="1"/>
+        <Button x:Name="Button02" Content="{Binding ObservableBoard[2], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="2" Width="100" Height="100" Grid.Column="3" Grid.Row="1"/>
+        <Button x:Name="Button10" Content="{Binding ObservableBoard[3], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="3" Width="100" Height="100" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="Button11" Content="{Binding ObservableBoard[4], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="4" Width="100" Height="100" Grid.Column="2" Grid.Row="2"/>
+        <Button x:Name="Button12" Content="{Binding ObservableBoard[5], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="5" Width="100" Height="100" Grid.Column="3" Grid.Row="2"/>
+        <Button x:Name="Button20" Content="{Binding ObservableBoard[6], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="6" Width="100" Height="100" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="Button21" Content="{Binding ObservableBoard[7], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="7" Width="100" Height="100" Grid.Column="2" Grid.Row="3"/>
+        <Button x:Name="Button22" Content="{Binding ObservableBoard[8], UpdateSourceTrigger=PropertyChanged}" Command="{Binding MarkFieldCommand}" CommandParameter="8" Width="100" Height="100" Grid.Column="3" Grid.Row="3"/>
+        <Button x:Name="ButtonReset" Content="Reset Game" Command="{Binding ResetGame}" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Height="25" Grid.Column="4" Grid.Row="1"/>
+    </Grid>
+</Window>
