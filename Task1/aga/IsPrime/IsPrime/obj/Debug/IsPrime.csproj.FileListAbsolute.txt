@@ -1,0 +1,6 @@
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\bin\Debug\IsPrime.exe.config
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\obj\Debug\IsPrime.csprojResolveAssemblyReference.cache
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\bin\Debug\IsPrime.exe
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\bin\Debug\IsPrime.pdb
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\obj\Debug\IsPrime.exe
+F:\C#\programming\Task1\aga\IsPrime\IsPrime\obj\Debug\IsPrime.pdb

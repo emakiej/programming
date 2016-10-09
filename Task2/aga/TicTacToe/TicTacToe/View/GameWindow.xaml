@@ -1,0 +1,50 @@
+﻿<Window x:Class="TicTacToe.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TicTacToe.ViewModel"
+        xmlns:converters="clr-namespace:TicTacToe.Converters"
+        mc:Ignorable="d"
+        Title="The Game" MaxWidth="300" MaxHeight="300" MinWidth="300" MinHeight="270">
+
+    <Window.DataContext>
+        <local:BoardViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Width="50" Height="50" Name="A1" Content="{Binding Path=Buttons[0][0].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="0"/>
+        <Button Width="50" Height="50" Name="A2" Grid.Row="1" Content="{Binding Path=Buttons[0][1].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="1"/>
+        <Button Width="50" Height="50" Name="A3" Grid.Row="2" Content="{Binding Path=Buttons[0][2].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="2"/>
+        <Button Width="50" Height="50" Name="B1" Grid.Column="1" Content="{Binding Path=Buttons[1][0].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="3"/>
+        <Button Width="50" Height="50" Name="B2" Grid.Row="1" Grid.Column="1" Content="{Binding Path=Buttons[1][1].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="4"/>
+        <Button Width="50" Height="50" Name="B3" Grid.Row="2" Grid.Column="1" Content="{Binding Path=Buttons[1][2].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="5"/>
+        <Button Width="50" Height="50" Name="C1" Grid.Column="2" Content="{Binding Path=Buttons[2][0].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="6"/>
+        <Button Width="50" Height="50" Name="C2" Grid.Row="1" Grid.Column="2" Content="{Binding Path=Buttons[2][1].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="7"/>
+        <Button Width="50" Height="50" Name="C3" Grid.Row="2" Grid.Column="2" Content="{Binding Path=Buttons[2][2].Value, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ButtonClickCommand}" CommandParameter="8"/>
+        <Label x:Name="Turn" Content="Turn" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="25" FontSize="10" FontWeight="Bold" FontFamily="Hobo Std" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="diplayTurn" Content="{Binding CurrentTurn}" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="25" FontSize="10" FontFamily="Hobo Std" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Black" Foreground="AliceBlue"/>
+        <Label x:Name="messageBox" Content="{Binding InfoText}" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" Grid.ColumnSpan="4" VerticalContentAlignment="Center" FontFamily="Hobo Std" FontWeight="Bold"/>
+        <Button x:Name="tryAgain" Content="Try again" Command="{Binding ButtonResetGame}" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" FontWeight="Bold" FontFamily="Hobo Std" Foreground="ForestGreen" Visibility="{Binding TryAgainVisibility, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    </Grid>
+</Window>
