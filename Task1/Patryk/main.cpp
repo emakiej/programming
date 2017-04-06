@@ -3,43 +3,46 @@
 
 using namespace std;
 
-bool isPrime(int value)
+bool checkIfPrime(int value)
 {
-    bool isPrimeInd = true;
-    int i = 2;
-    do
+    if (value < 2)
     {
-        if ((value % i == 0 || value < 2) && value!=2)
+        return false;
+    }
+
+    for(int i=2; i<value; i++)
+    {
+        if(value % i == 0)
         {
-            isPrimeInd = false;
-            break;
-		}
-        i++;
-    }while (i<value);
-	return isPrimeInd;
+            return false;
+        }
+    }
 }
 
-void primeChecker(int value)
+void printListOfSmallerPrimes(int value)
 {
-    if(isPrime(value))
+        cout << "All primes that are less than " << value <<endl;
+        for(int i=1; i<value; i++)
+        {
+            if(checkIfPrime(i))
+            {
+                cout << i << "  ";
+            }
+        }
+}
+
+void printPrimeCheckResult(int value)
+{
+    if(checkIfPrime(value))
     {
         cout << value << " is prime!" << endl;
+        printListOfSmallerPrimes(value);
     }
     else
         cout << value << " is not prime!" << endl;
 }
 
-void listOfPrimes(int value)
-{
-    cout << "All primes that are less than " << value <<endl;
-    for(int i=1; i<value; i++)
-    {
-        if(isPrime(i))
-        {
-                cout << i << "  ";
-        }
-    }
-}
+
 
 int main()
 {
@@ -47,9 +50,9 @@ int main()
     cout << "isPrime checker" << endl << "Please provide a number to check:" << endl;
     cin>>number;
 
-    primeChecker(number);
-    listOfPrimes(number);
+    printPrimeCheckResult(number);
 
-    getchar(); getchar();
+    getchar();
+
     return 0;
 }
